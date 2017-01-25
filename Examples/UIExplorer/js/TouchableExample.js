@@ -89,29 +89,11 @@ exports.examples = [
       height: 100,
       transform: [{scale: mScale}]
     };
-    const roundedStyle = {
-      backgroundColor: 'white',
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 10,
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 40,
-    };
     return (
       <View>
         <View style={styles.row}>
           <TouchableNativeFeedback>
             <Animated.View style={style}/>
-          </TouchableNativeFeedback>
-        </View>
-        <View style={[styles.row, styles.block]}>
-          <TouchableNativeFeedback
-            background={TouchableNativeFeedback.Ripple(null, false, true)}>
-            <View style={roundedStyle}>
-              <Text style={[styles.button, styles.nativeFeedbackButton, styles.block]}>
-                TouchableNativeFeedback.Ripple can be configured to be
-                constrained to the child‘s border radii.
-              </Text>
-            </View>
           </TouchableNativeFeedback>
         </View>
       </View>

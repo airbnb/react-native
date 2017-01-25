@@ -12,8 +12,8 @@ package com.facebook.react.views.view;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.util.TypedValue;
@@ -22,8 +22,6 @@ import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.SoftAssertions;
 import com.facebook.react.uimanager.ViewProps;
-
-import javax.annotation.Nullable;
 
 /**
  * Utility class that helps with converting android drawable description used in JS to an actual
@@ -34,15 +32,8 @@ public class ReactDrawableHelper {
   private static final TypedValue sResolveOutValue = new TypedValue();
 
   public static Drawable createDrawableFromJSDescription(
-    Context context,
-    ReadableMap drawableDescriptionDict) {
-    return createDrawableFromJSDescription(context, drawableDescriptionDict, null);
-  }
-
-  public static Drawable createDrawableFromJSDescription(
       Context context,
-      ReadableMap drawableDescriptionDict,
-      @Nullable float[] cornerRadii) {
+      ReadableMap drawableDescriptionDict) {
     String type = drawableDescriptionDict.getString("type");
     if ("ThemeAttrAndroid".equals(type)) {
       String attr = drawableDescriptionDict.getString("attribute");
@@ -84,16 +75,11 @@ public class ReactDrawableHelper {
               "couldn't be resolved into a drawable");
         }
       }
-      PaintDrawable mask = null;
+      Drawable mask = null;
       if (!drawableDescriptionDict.hasKey("borderless") ||
-        drawableDescriptionDict.isNull("borderless") ||
-        !drawableDescriptionDict.getBoolean("borderless")) {
-        mask = new PaintDrawable(Color.WHITE);
-        if (cornerRadii != null &&
-          drawableDescriptionDict.hasKey("borderWithRadius") &&
-          drawableDescriptionDict.getBoolean("borderWithRadius")) {
-          mask.setCornerRadii(cornerRadii);
-        }
+          drawableDescriptionDict.isNull("borderless") ||
+          !drawableDescriptionDict.getBoolean("borderless")) {
+        mask = new ColorDrawable(Color.WHITE);
       }
       ColorStateList colorStateList = new ColorStateList(
           new int[][] {new int[]{}},
