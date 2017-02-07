@@ -17,8 +17,13 @@
 
 #import <UIKit/UIDevice.h>
 
+#if defined(__APPLE__)
 #import <React/JSBundleType.h>
 #import <React/JavaScriptCore.h>
+#else
+#import <cxxreact/JSBundleType.h>
+#import <jschelpers/JavaScriptCore.h>
+#endif
 #import <React/RCTAssert.h>
 #import <React/RCTBridge+Private.h>
 #import <React/RCTDefines.h>
