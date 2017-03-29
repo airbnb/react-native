@@ -96,6 +96,11 @@ public class ReactTextInputShadowNode extends ReactTextShadowNode implements
         (int) Math.floor(getPadding(Spacing.END)),
         (int) Math.floor(getPadding(Spacing.BOTTOM)));
 
+    // API 21+: https://developer.android.com/reference/android/widget/TextView.html#setLetterSpacing(float)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      editText.setLetterSpacing(getLetterSpacing());
+    }
+
     if (mNumberOfLines != UNSET) {
       editText.setLines(mNumberOfLines);
     }
@@ -146,6 +151,8 @@ public class ReactTextInputShadowNode extends ReactTextShadowNode implements
           getPadding(Spacing.TOP),
           getPadding(Spacing.END),
           getPadding(Spacing.BOTTOM),
+          getLetterSpacing(),
+          getFontSize(),
           mTextAlign
         );
       uiViewOperationQueue.enqueueUpdateExtraData(getReactTag(), reactTextUpdate);

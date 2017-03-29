@@ -304,6 +304,7 @@ public class ReactTextShadowNode extends LayoutShadowNode {
   }
 
   private float mLineHeight = Float.NaN;
+  private float mLetterSpacing = Float.NaN;
   private boolean mIsColorSet = false;
   private int mColor;
   private boolean mIsBackgroundColorSet = false;
@@ -358,6 +359,14 @@ public class ReactTextShadowNode extends LayoutShadowNode {
     if (!isVirtual) {
       setMeasureFunction(TEXT_MEASURE_FUNCTION);
     }
+  }
+
+  public float getLetterSpacing() {
+    return mLetterSpacing;
+  }
+
+  public int getFontSize() {
+    return mFontSize;
   }
 
   // Returns a line height which takes into account the requested line height
@@ -415,6 +424,12 @@ public class ReactTextShadowNode extends LayoutShadowNode {
   @ReactProp(name = ViewProps.LINE_HEIGHT, defaultInt = UNSET)
   public void setLineHeight(int lineHeight) {
     mLineHeight = lineHeight == UNSET ? Float.NaN : PixelUtil.toPixelFromSP(lineHeight);
+    markUpdated();
+  }
+
+  @ReactProp(name = ViewProps.LETTER_SPACING, defaultFloat = UNSET)
+  public void setLetterSpacing(float letterSpacing) {
+    mLetterSpacing = letterSpacing == UNSET ? Float.NaN : letterSpacing;
     markUpdated();
   }
 
@@ -591,6 +606,8 @@ public class ReactTextShadowNode extends LayoutShadowNode {
           getPadding(Spacing.TOP),
           getPadding(Spacing.END),
           getPadding(Spacing.BOTTOM),
+          getLetterSpacing(),
+          getFontSize(),
           getTextAlign()
         );
       uiViewOperationQueue.enqueueUpdateExtraData(getReactTag(), reactTextUpdate);
