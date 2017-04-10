@@ -164,12 +164,14 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
     RCTDeviceEventEmitter eventEmitter = getEventEmitter(executorToken);
     Request.Builder requestBuilder = buildRequest(executorToken, method, url, requestId, headers,
       data, eventEmitter);
-    OkHttpClient client = buildOkHttpClient(responseType, useIncrementalUpdates, timeout,
-      eventEmitter, requestId);
-    addRequest(requestId);
-    ResponseCallback callback = new ResponseCallback(requestId, responseType, eventEmitter,
-      useIncrementalUpdates, this);
-    fireRequest(requestBuilder, client, callback);
+    if (requestBuilder != null) {
+      OkHttpClient client = buildOkHttpClient(responseType, useIncrementalUpdates, timeout,
+        eventEmitter, requestId);
+      addRequest(requestId);
+      ResponseCallback callback = new ResponseCallback(requestId, responseType, eventEmitter,
+        useIncrementalUpdates, this);
+      fireRequest(requestBuilder, client, callback);
+    }
   }
 
   public OkHttpClient buildOkHttpClient(
