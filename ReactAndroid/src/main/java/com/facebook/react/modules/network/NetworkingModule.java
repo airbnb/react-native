@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
- * <p>
+ *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
@@ -224,6 +224,7 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
     return clientBuilder.build();
   }
 
+  /** Returns a Request.Builder for the provided parameters or null if there were errors. */
   @Nullable public Request.Builder buildRequest(
       ExecutorToken executorToken,
       String method,
@@ -237,7 +238,6 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
     if (requestId != 0) {
       requestBuilder.tag(requestId);
     }
-
 
     Headers requestHeaders = extractHeaders(headers, data);
     if (requestHeaders == null) {
@@ -282,7 +282,7 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
       }
       String uri = data.getString(REQUEST_BODY_KEY_URI);
       InputStream fileInputStream =
-        RequestBodyUtil.getFileInputStream(getReactApplicationContext(), uri);
+          RequestBodyUtil.getFileInputStream(getReactApplicationContext(), uri);
       if (fileInputStream == null) {
         ResponseUtil.onRequestError(
           eventEmitter,
@@ -292,8 +292,8 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
         return null;
       }
       requestBuilder.method(
-        method,
-        RequestBodyUtil.create(MediaType.parse(contentType), fileInputStream));
+          method,
+          RequestBodyUtil.create(MediaType.parse(contentType), fileInputStream));
     } else if (data.hasKey(REQUEST_BODY_KEY_FORMDATA)) {
       if (contentType == null) {
         contentType = "multipart/form-data";
@@ -433,7 +433,7 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
         }
         String fileContentUriStr = bodyPart.getString(REQUEST_BODY_KEY_URI);
         InputStream fileInputStream =
-          RequestBodyUtil.getFileInputStream(getReactApplicationContext(), fileContentUriStr);
+            RequestBodyUtil.getFileInputStream(getReactApplicationContext(), fileContentUriStr);
         if (fileInputStream == null) {
           ResponseUtil.onRequestError(
             eventEmitter,
@@ -487,6 +487,6 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
 
   public RCTDeviceEventEmitter getEventEmitter(ExecutorToken ExecutorToken) {
     return getReactApplicationContext()
-      .getJSModule(ExecutorToken, RCTDeviceEventEmitter.class);
+        .getJSModule(ExecutorToken, RCTDeviceEventEmitter.class);
   }
 }

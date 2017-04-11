@@ -15,6 +15,10 @@ import okhttp3.Headers;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+/**
+ * This class has been originally extracted out of {@link NetworkingModule} by pulling all the
+ * network response parsing logic and related methods into this Callback.
+ */
 public class ResponseCallback implements Callback {
   private static final int MAX_CHUNK_SIZE_BETWEEN_FLUSHES = 8 * 1024; // 8K
   private final int requestId;
