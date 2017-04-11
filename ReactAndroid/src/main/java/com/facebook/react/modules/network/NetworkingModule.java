@@ -91,9 +91,9 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
    * @param client the {@link OkHttpClient} to be used for networking
    */
   /* package */ NetworkingModule(
-      ReactApplicationContext context,
-      @Nullable String defaultUserAgent,
-      OkHttpClient client) {
+    ReactApplicationContext context,
+    @Nullable String defaultUserAgent,
+    OkHttpClient client) {
     this(context, defaultUserAgent, client, null);
   }
 
