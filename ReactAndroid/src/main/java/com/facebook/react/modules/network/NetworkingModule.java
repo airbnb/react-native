@@ -62,10 +62,10 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
   private boolean mShuttingDown;
 
   /* package */ NetworkingModule(
-    ReactApplicationContext reactContext,
-    @Nullable String defaultUserAgent,
-    OkHttpClient client,
-    @Nullable List<NetworkInterceptorCreator> networkInterceptorCreators) {
+      ReactApplicationContext reactContext,
+      @Nullable String defaultUserAgent,
+      OkHttpClient client,
+      @Nullable List<NetworkInterceptorCreator> networkInterceptorCreators) {
     super(reactContext);
 
     if (networkInterceptorCreators != null) {
