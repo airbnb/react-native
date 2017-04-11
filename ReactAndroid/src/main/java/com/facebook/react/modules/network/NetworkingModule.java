@@ -91,9 +91,9 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
    * @param client the {@link OkHttpClient} to be used for networking
    */
   /* package */ NetworkingModule(
-    ReactApplicationContext context,
-    @Nullable String defaultUserAgent,
-    OkHttpClient client) {
+      ReactApplicationContext context,
+      @Nullable String defaultUserAgent,
+      OkHttpClient client) {
     this(context, defaultUserAgent, client, null);
   }
 
@@ -149,15 +149,15 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
    * @param timeout value of 0 results in no timeout
    */
   public void sendRequest(
-    final ExecutorToken executorToken,
-    String method,
-    String url,
-    final int requestId,
-    ReadableArray headers,
-    ReadableMap data,
-    final String responseType,
-    final boolean useIncrementalUpdates,
-    int timeout) {
+      final ExecutorToken executorToken,
+      String method,
+      String url,
+      final int requestId,
+      ReadableArray headers,
+      ReadableMap data,
+      final String responseType,
+      final boolean useIncrementalUpdates,
+      int timeout) {
     RCTDeviceEventEmitter eventEmitter = getEventEmitter(executorToken);
     Request.Builder requestBuilder = buildRequest(executorToken, method, url, requestId, headers,
       data, eventEmitter);
@@ -172,11 +172,11 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
   }
 
   public OkHttpClient buildOkHttpClient(
-    final String responseType,
-    final boolean useIncrementalUpdates,
-    int timeout,
-    final RCTDeviceEventEmitter eventEmitter,
-    final int requestId) {
+      final String responseType,
+      final boolean useIncrementalUpdates,
+      int timeout,
+      final RCTDeviceEventEmitter eventEmitter,
+      final int requestId) {
     OkHttpClient.Builder clientBuilder = mClient.newBuilder();
 
     // If JS is listening for progress updates, install a ProgressResponseBody that intercepts the
@@ -226,13 +226,13 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
   }
 
   @Nullable public Request.Builder buildRequest(
-    ExecutorToken executorToken,
-    String method,
-    String url,
-    final int requestId,
-    ReadableArray headers,
-    ReadableMap data,
-    final RCTDeviceEventEmitter eventEmitter) {
+      ExecutorToken executorToken,
+      String method,
+      String url,
+      final int requestId,
+      ReadableArray headers,
+      ReadableMap data,
+      final RCTDeviceEventEmitter eventEmitter) {
     Request.Builder requestBuilder = new Request.Builder().url(url);
 
     if (requestId != 0) {
@@ -330,9 +330,9 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
   }
 
   public void fireRequest(
-    Request.Builder requestBuilder,
-    OkHttpClient client,
-    Callback callback) {
+      Request.Builder requestBuilder,
+      OkHttpClient client,
+      Callback callback) {
     client.newCall(requestBuilder.build()).enqueue(callback);
   }
 
@@ -378,8 +378,8 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void clearCookies(
-    ExecutorToken executorToken,
-    com.facebook.react.bridge.Callback callback) {
+      ExecutorToken executorToken,
+      com.facebook.react.bridge.Callback callback) {
     mCookieHandler.clearCookies(callback);
   }
 
@@ -389,10 +389,10 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
   }
 
   private @Nullable MultipartBody.Builder constructMultipartBody(
-    ExecutorToken ExecutorToken,
-    ReadableArray body,
-    String contentType,
-    int requestId) {
+      ExecutorToken ExecutorToken,
+      ReadableArray body,
+      String contentType,
+      int requestId) {
     RCTDeviceEventEmitter eventEmitter = getEventEmitter(ExecutorToken);
     MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
     multipartBuilder.setType(MediaType.parse(contentType));
@@ -455,8 +455,8 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
    * Extracts the headers from the Array. If the format is invalid, this method will return null.
    */
   private @Nullable Headers extractHeaders(
-    @Nullable ReadableArray headersArray,
-    @Nullable ReadableMap requestData) {
+      @Nullable ReadableArray headersArray,
+      @Nullable ReadableMap requestData) {
     if (headersArray == null) {
       return null;
     }

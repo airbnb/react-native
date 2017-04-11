@@ -24,11 +24,11 @@ public class ResponseCallback implements Callback {
   private final NetworkingModule networkingModule;
 
   public ResponseCallback(
-    int requestId,
-    String responseType,
-    DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter,
-    boolean useIncrementalUpdates,
-    NetworkingModule networkingModule) {
+      int requestId,
+      String responseType,
+      DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter,
+      boolean useIncrementalUpdates,
+      NetworkingModule networkingModule) {
     this.requestId = requestId;
     this.responseType = responseType;
     this.eventEmitter = eventEmitter;
@@ -96,9 +96,9 @@ public class ResponseCallback implements Callback {
   }
 
   private void readWithProgress(
-    DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter,
-    int requestId,
-    ResponseBody responseBody) throws IOException {
+      DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter,
+      int requestId,
+      ResponseBody responseBody) throws IOException {
     long totalBytesRead = -1;
     long contentLength = -1;
     try {
