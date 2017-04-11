@@ -343,11 +343,11 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
     mRequestIds.add(requestId);
   }
 
-  @Override public boolean isShuttingDown() {
+  public boolean isShuttingDown() {
     return mShuttingDown;
   }
 
-  @Override public synchronized void removeRequest(int requestId) {
+  public synchronized void removeRequest(int requestId) {
     mRequestIds.remove(requestId);
   }
 
