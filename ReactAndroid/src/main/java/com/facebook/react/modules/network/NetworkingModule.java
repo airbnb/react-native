@@ -44,8 +44,7 @@ import okhttp3.Response;
  * Implements the XMLHttpRequest JavaScript interface.
  */
 @ReactModule(name = "RCTNetworking", supportsWebWorkers = true)
-public final class NetworkingModule extends ReactContextBaseJavaModule implements
-  NetworkStateManager {
+public final class NetworkingModule extends ReactContextBaseJavaModule {
 
   private static final String CONTENT_ENCODING_HEADER_NAME = "content-encoding";
   private static final String CONTENT_TYPE_HEADER_NAME = "content-type";
@@ -54,7 +53,6 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
   private static final String REQUEST_BODY_KEY_FORMDATA = "formData";
   private static final String USER_AGENT_HEADER_NAME = "user-agent";
   private static final int CHUNK_TIMEOUT_NS = 100 * 1000000; // 100ms
-  private static final int MAX_CHUNK_SIZE_BETWEEN_FLUSHES = 8 * 1024; // 8K
 
   private final OkHttpClient mClient;
   private final ForwardingCookieHandler mCookieHandler;
@@ -63,13 +61,12 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
   private final Set<Integer> mRequestIds;
   private boolean mShuttingDown;
 
-  /* package */
-  NetworkingModule(
-    ReactApplicationContext reactContext,
-    @Nullable String defaultUserAgent,
-    OkHttpClient client,
-    @Nullable List<NetworkInterceptorCreator> networkInterceptorCreators) {
-    super(reactContext);
+  /* package */ NetworkingModule(
+      ReactApplicationContext reactContext,
+      @Nullable String defaultUserAgent,
+      OkHttpClient client,
+      @Nullable List<NetworkInterceptorCreator> networkInterceptorCreators) {
+      super(reactContext);
 
     if (networkInterceptorCreators != null) {
       OkHttpClient.Builder clientBuilder = client.newBuilder();
@@ -88,10 +85,10 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
   }
 
   /**
-   * @param context          the ReactContext of the application
+   * @param context the ReactContext of the application
    * @param defaultUserAgent the User-Agent header that will be set for all requests where the
-   *                         caller does not provide one explicitly
-   * @param client           the {@link OkHttpClient} to be used for networking
+   * caller does not provide one explicitly
+   * @param client the {@link OkHttpClient} to be used for networking
    */
   /* package */ NetworkingModule(
     ReactApplicationContext context,
@@ -108,10 +105,10 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
   }
 
   /**
-   * @param context                    the ReactContext of the application
+   * @param context the ReactContext of the application
    * @param networkInterceptorCreators list of {@link NetworkInterceptorCreator}'s whose create()
-   *                                   methods would be called to attach the interceptors to the
-   *                                   client.
+   * methods would be called to attach the interceptors to the
+   * client.
    */
   public NetworkingModule(
     ReactApplicationContext context,
@@ -120,9 +117,9 @@ public final class NetworkingModule extends ReactContextBaseJavaModule implement
   }
 
   /**
-   * @param context          the ReactContext of the application
+   * @param context the ReactContext of the application
    * @param defaultUserAgent the User-Agent header that will be set for all requests where the
-   *                         caller does not provide one explicitly
+   * caller does not provide one explicitly
    */
   public NetworkingModule(ReactApplicationContext context, String defaultUserAgent) {
     this(context, defaultUserAgent, OkHttpClientProvider.getOkHttpClient(), null);

@@ -21,27 +21,27 @@ public class ResponseCallback implements Callback {
   private final String responseType;
   private final DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter;
   private final boolean useIncrementalUpdates;
-  private final NetworkStateManager stateManager;
+  private final NetworkingModule networkingModule;
 
   public ResponseCallback(
     int requestId,
     String responseType,
     DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter,
     boolean useIncrementalUpdates,
-    NetworkStateManager stateManager) {
+    NetworkingModule networkingModule) {
     this.requestId = requestId;
     this.responseType = responseType;
     this.eventEmitter = eventEmitter;
     this.useIncrementalUpdates = useIncrementalUpdates;
-    this.stateManager = stateManager;
+    this.networkingModule = networkingModule;
   }
 
   @Override
   public void onFailure(Call call, IOException e) {
-    if (stateManager.isShuttingDown()) {
+    if (networkingModule.isShuttingDown()) {
       return;
     }
-    stateManager.removeRequest(requestId);
+    networkingModule.removeRequest(requestId);
     ResponseUtil.onRequestError(eventEmitter, requestId, e.getMessage(), toIOException(e));
   }
 
@@ -59,10 +59,10 @@ public class ResponseCallback implements Callback {
 
   @Override
   public void onResponse(Call call, Response response) {
-    if (stateManager.isShuttingDown()) {
+    if (networkingModule.isShuttingDown()) {
       return;
     }
-    stateManager.removeRequest(requestId);
+    networkingModule.removeRequest(requestId);
     // Before we touch the body send headers to JS
     ResponseUtil.onResponseReceived(
       eventEmitter,
