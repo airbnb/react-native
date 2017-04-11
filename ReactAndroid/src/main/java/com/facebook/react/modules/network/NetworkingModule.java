@@ -310,17 +310,17 @@ public final class NetworkingModule extends ReactContextBaseJavaModule {
         RequestBodyUtil.createProgressRequest(
           multipartBuilder.build(),
           new ProgressListener() {
-            long last = System.nanoTime();
+        long last = System.nanoTime();
 
-            @Override
-            public void onProgress(long bytesWritten, long contentLength, boolean done) {
-              long now = System.nanoTime();
-              if (done || shouldDispatch(now, last)) {
-                ResponseUtil.onDataSend(eventEmitter, requestId, bytesWritten, contentLength);
-                last = now;
-              }
-            }
-          }));
+        @Override
+        public void onProgress(long bytesWritten, long contentLength, boolean done) {
+          long now = System.nanoTime();
+          if (done || shouldDispatch(now, last)) {
+            ResponseUtil.onDataSend(eventEmitter, requestId, bytesWritten, contentLength);
+            last = now;
+          }
+        }
+      }));
     } else {
       // Nothing in data payload, at least nothing we could understand anyway.
       requestBuilder.method(method, RequestBodyUtil.getEmptyBody(method));
