@@ -9,6 +9,7 @@
 
 package com.facebook.react.devsupport;
 
+import okio.ByteString;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.ParameterizedRobolectricTestRunner;
@@ -19,7 +20,6 @@ import java.util.Collection;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
-import okhttp3.ws.WebSocket;
 
 import static org.mockito.Mockito.*;
 import org.robolectric.RobolectricTestRunner;
@@ -32,8 +32,8 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 1, \"target\": \"targetValue\", \"action\": \"actionValue\"}"));
+    client.onMessage(null,
+      "{\"version\": 1, \"target\": \"targetValue\", \"action\": \"actionValue\"}");
     verify(callback).onMessage("targetValue", "actionValue");
   }
 
@@ -42,8 +42,8 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.BINARY,
-      "{\"version\": 1, \"target\": \"targetValue\", \"action\": \"actionValue\"}"));
+    client.onMessage(null,
+            ByteString.encodeUtf8("{\"version\": 1, \"target\": \"targetValue\", \"action\": \"actionValue\"}"));
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 
@@ -52,8 +52,7 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 1, \"action\": \"actionValue\"}"));
+    client.onMessage(null, "{\"version\": 1, \"action\": \"actionValue\"}");
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 
@@ -62,8 +61,8 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 1, \"target\": null, \"action\": \"actionValue\"}"));
+    client.onMessage(null,
+      "{\"version\": 1, \"target\": null, \"action\": \"actionValue\"}");
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 
@@ -72,8 +71,7 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 1, \"target\": \"targetValue\"}"));
+    client.onMessage(null, "{\"version\": 1, \"target\": \"targetValue\"}");
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 
@@ -82,8 +80,8 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 1, \"target\": \"targetValue\", \"action\": null}"));
+    client.onMessage(null,
+      "{\"version\": 1, \"target\": \"targetValue\", \"action\": null}");
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 
@@ -92,8 +90,8 @@ public class JSPackagerWebSocketClientTest {
     final JSPackagerWebSocketClient.JSPackagerCallback callback =
       mock(JSPackagerWebSocketClient.JSPackagerCallback.class);
     final JSPackagerWebSocketClient client = new JSPackagerWebSocketClient("ws://not_needed", callback);
-    client.onMessage(ResponseBody.create(WebSocket.TEXT,
-      "{\"version\": 2, \"target\": \"targetValue\", \"action\": \"actionValue\"}"));
+    client.onMessage(null,
+      "{\"version\": 2, \"target\": \"targetValue\", \"action\": \"actionValue\"}");
     verify(callback, never()).onMessage(anyString(), anyString());
   }
 }
