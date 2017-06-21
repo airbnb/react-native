@@ -150,6 +150,7 @@ public class ReactInstanceManager {
   private final boolean mLazyViewManagersEnabled;
   private final boolean mSetupReactContextInBackgroundEnabled;
   private final boolean mUseSeparateUIBackgroundThread;
+  private final boolean mManuallyEnableDevSupport;
 
   private final ReactInstanceDevCommandsHandler mDevInterface =
       new ReactInstanceDevCommandsHandler() {
@@ -222,7 +223,8 @@ public class ReactInstanceManager {
     boolean lazyNativeModulesEnabled,
     boolean lazyViewManagersEnabled,
     boolean setupReactContextInBackgroundEnabled,
-    boolean useSeparateUIBackgroundThread) {
+    boolean useSeparateUIBackgroundThread,
+    boolean manuallyEnableDevSupport) {
 
     initializeSoLoaderIfNecessary(applicationContext);
 
@@ -251,6 +253,7 @@ public class ReactInstanceManager {
     mLazyViewManagersEnabled = lazyViewManagersEnabled;
     mSetupReactContextInBackgroundEnabled = setupReactContextInBackgroundEnabled;
     mUseSeparateUIBackgroundThread = useSeparateUIBackgroundThread;
+    mManuallyEnableDevSupport = manuallyEnableDevSupport;
 
     // Instantiate ReactChoreographer in UI thread.
     ReactChoreographer.initialize();
@@ -435,7 +438,7 @@ public class ReactInstanceManager {
     UiThreadUtil.assertOnUiThread();
 
     mDefaultBackButtonImpl = null;
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 
@@ -477,7 +480,7 @@ public class ReactInstanceManager {
     UiThreadUtil.assertOnUiThread();
 
     mDefaultBackButtonImpl = defaultBackButtonImpl;
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(true);
     }
 
@@ -495,7 +498,7 @@ public class ReactInstanceManager {
   public void onHostDestroy() {
     UiThreadUtil.assertOnUiThread();
 
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 
@@ -524,7 +527,7 @@ public class ReactInstanceManager {
   public void destroy() {
     UiThreadUtil.assertOnUiThread();
 
-    if (mUseDeveloperSupport) {
+    if (mUseDeveloperSupport && !mManuallyEnableDevSupport) {
       mDevSupportManager.setDevSupportEnabled(false);
     }
 

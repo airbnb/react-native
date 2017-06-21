@@ -44,6 +44,7 @@ public class ReactInstanceManagerBuilder {
   protected boolean mLazyViewManagersEnabled;
   protected boolean mSetupReactContextInBackground;
   protected boolean mUseSeparateUIBackgroundThread;
+  protected boolean mManuallyEnableDevSupport;
 
   /* package protected */ ReactInstanceManagerBuilder() {
   }
@@ -201,6 +202,17 @@ public class ReactInstanceManagerBuilder {
   }
 
   /**
+   * By default, the developer support tools will be enabled and disabled in {@link #onHostPause()}
+   * and {@link #onHostResume(Activity, DefaultHardwareBackBtnHandler)}. This may not be ideal for
+   * multi-activity applications that often switch between native and react native screens or
+   * apps that want tighter control over when the dev tools should be enabled.
+   */
+  public ReactInstanceManagerBuilder manuallyEnableDevSupport() {
+    mManuallyEnableDevSupport = true;
+    return this;
+  }
+
+  /**
    * Instantiates a new {@link ReactInstanceManager}.
    * Before calling {@code build}, the following must be called:
    * <ul>
@@ -246,6 +258,7 @@ public class ReactInstanceManagerBuilder {
       mLazyNativeModulesEnabled,
       mLazyViewManagersEnabled,
       mSetupReactContextInBackground,
-      mUseSeparateUIBackgroundThread);
+      mUseSeparateUIBackgroundThread,
+      mManuallyEnableDevSupport);
   }
 }
