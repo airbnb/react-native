@@ -238,7 +238,8 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(requestAuthorization)
 {
-  [self requestSpecificAuthorization:RCTLocationPermissionIOSUnknown];}
+  [self requestSpecificAuthorization:RCTLocationPermissionIOSUnknown];
+}
 
 RCT_EXPORT_METHOD(startObserving:(RCTLocationOptions)options)
 {
