@@ -16,6 +16,13 @@ module.exports = moduleName => {
     render() {
       const name = RealComponent.displayName || RealComponent.name;
 
+      if (global.__JSDOM_MOUNTABLE__) {
+        return React.createElement(
+          name.replace(/^(RCT|RK)/,''),
+          { children: this.props.children },
+        );
+      }
+
       return React.createElement(
         name.replace(/^(RCT|RK)/,''),
         this.props,

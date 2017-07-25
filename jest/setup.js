@@ -249,9 +249,17 @@ jest
 jest.doMock('requireNativeComponent', () => {
   const React = require('react');
 
-  return viewName => props => React.createElement(
-    viewName,
-    props,
-    props.children,
-  );
+  return viewName => props => {
+    if (global.__JSDOM_MOUNTABLE__) {
+      return React.createElement(
+        viewName,
+        { children: props.children },
+      );
+    }
+    return React.createElement(
+      viewName,
+      props,
+      props.children,
+    );
+  };
 });
