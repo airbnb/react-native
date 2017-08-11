@@ -123,6 +123,11 @@ static NSString *RCTRecursiveAccessibilityLabel(UIView *view)
     _hitTestEdgeInsets = UIEdgeInsetsZero;
 
     _backgroundColor = super.backgroundColor;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(voiceOverStatusDidChange:)
+                                                 name:UIAccessibilityVoiceOverStatusChanged
+                                               object:nil];
   }
 
   return self;
@@ -239,6 +244,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   NSRange semicolonRange = [superDescription rangeOfString:@";"];
   NSString *replacement = [NSString stringWithFormat:@"; reactTag: %@;", self.reactTag];
   return [superDescription stringByReplacingCharactersInRange:semicolonRange withString:replacement];
+}
+
+#pragma mark - NSNotificationCenter
+
+- (void)voiceOverStatusDidChange:(__unused NSNotification *)notification {
+  // If VoiceOver is enabled, we need to disable removing clipped subviews to ensure
+  // accessible navigation works properly.
+  if (UIAccessibilityIsVoiceOverRunning()) {
+    self.removeClippedSubviews = NO;
+  }
 }
 
 #pragma mark - Statics for dealing with layoutGuides
@@ -358,6 +373,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (void)setRemoveClippedSubviews:(BOOL)removeClippedSubviews
 {
+  // removeClippedSubviews prevents VoiceOver from navigating through scrollViews properly,
+  // so we always disable removing clipped subviews when VoiceOver is active.
+  if (UIAccessibilityIsVoiceOverRunning()) {
+    RCTLogInfo(@"removeClippedSubviews is always set to false when VoiceOver is active");
+    removeClippedSubviews = NO;
+  }
   if (!removeClippedSubviews && _removeClippedSubviews) {
     [self react_remountAllSubviews];
   }
