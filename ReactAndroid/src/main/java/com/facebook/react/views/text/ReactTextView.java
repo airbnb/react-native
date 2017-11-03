@@ -72,7 +72,9 @@ public class ReactTextView extends TextView implements ReactCompoundView {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       float nextLetterSpacing = update.getLetterSpacing();
       int fontSize = update.getFontSize();
-      if (!FloatUtil.floatsEqual(mLetterSpacing, nextLetterSpacing)) {
+      // We can only update the letter spacing if we have a valid font size. It will default to
+      // UNSET (-1) if not explicitly set.
+      if (!FloatUtil.floatsEqual(mLetterSpacing, nextLetterSpacing) && fontSize > 0) {
         mLetterSpacing = nextLetterSpacing;
         if(Float.isNaN(mLetterSpacing)) {
           setLetterSpacing((float)0.0);
