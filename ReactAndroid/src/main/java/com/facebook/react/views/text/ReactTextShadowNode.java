@@ -232,11 +232,13 @@ public class ReactTextShadowNode extends LayoutShadowNode {
             YogaMeasureMode heightMode) {
           // TODO(5578671): Handle text direction (see View#getTextDirectionHeuristic)
           TextPaint textPaint = sTextPaintInstance;
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-            !Float.isNaN(mLetterSpacing) &&
-            getFontSize() != UNSET) {
-            float fontSizeDip = PixelUtil.toDIPFromPixel(getFontSize());
-            sTextPaintInstance.setLetterSpacing(1 + (mLetterSpacing -  fontSizeDip) / fontSizeDip);
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (!Float.isNaN(mLetterSpacing) && getFontSize() != UNSET) {
+              float fontSizeDip = PixelUtil.toDIPFromPixel(getFontSize());
+              sTextPaintInstance.setLetterSpacing(1 + (mLetterSpacing - fontSizeDip) / fontSizeDip);
+            } else {
+              sTextPaintInstance.setLetterSpacing(0.f);
+            }
           }
           Layout layout;
           Spanned text = Assertions.assertNotNull(
