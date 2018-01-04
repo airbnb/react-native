@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.View;
 
 import com.facebook.react.R;
+import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.util.ReactFindViewUtil;
@@ -107,7 +108,7 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
   }
 
   @ReactProp(name = PROP_ACCESSIBILITY_COMPONENT_TYPE)
-  public void setAccessibilityComponentType(T view, String accessibilityComponentType) {
+  public void setAccessibilityComponentType(T view, Dynamic accessibilityComponentType) {
     AccessibilityHelper.updateAccessibilityComponentType(view, accessibilityComponentType);
   }
 

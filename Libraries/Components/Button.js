@@ -116,9 +116,11 @@ class Button extends React.Component {
     if (disabled) {
       accessibilityTraits.push('disabled');
     }
+    const accessibilityComponentType = accessibilityTraits;
+
     return (
       <Touchable
-        accessibilityComponentType="button"
+        accessibilityComponentType={accessibilityComponentType}
         accessibilityLabel={accessibilityLabel}
         accessibilityTraits={accessibilityTraits}
         testID={testID}

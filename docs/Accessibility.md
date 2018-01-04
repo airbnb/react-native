@@ -91,10 +91,19 @@ Assign this property to a custom function which will be called when someone perf
 
 #### accessibilityComponentType (Android)
 
-In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”). If we were using native buttons, this would work automatically. Since we are using javascript, we need to provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
+In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”). If we were using native buttons, this would work automatically. Since we are using javascript, we need to provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property for any UI component.
+
+To use, set the `accessibilityComponentType` property to one of (or an array of) accessibility strings:
+
+* **button** Used when the element should be treated as a button.
+* **radiobutton** Used when the element should be treated as a radio button.
+* **checked**  Used when the element (e.g. radio button) is checked.
+* **disabled** Used when the control is not enabled and does not respond to user input.
+* **radiobutton_checked** (deprecated) Same as ["radiobutton", "checked"].
+* **radiobutton_unchecked** (deprecated) Same as "radiobutton" or ["radiobutton"].
 
 ```javascript
-<TouchableWithoutFeedback accessibilityComponentType=”button”
+<TouchableWithoutFeedback accessibilityComponentType="button"
   onPress={this._onPress}>
   <View style={styles.button}>
     <Text style={styles.buttonText}>Press me!</Text>

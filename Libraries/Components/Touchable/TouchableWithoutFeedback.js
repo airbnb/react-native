@@ -44,9 +44,10 @@ const TouchableWithoutFeedback = createReactClass({
 
   propTypes: {
     accessible: PropTypes.bool,
-    accessibilityComponentType: PropTypes.oneOf(
-      AccessibilityComponentTypes
-    ),
+    accessibilityComponentType: PropTypes.oneOfType([
+      PropTypes.oneOf(AccessibilityComponentTypes),
+      PropTypes.arrayOf(PropTypes.oneOf(AccessibilityComponentTypes)),
+    ]),
     accessibilityTraits: PropTypes.oneOfType([
       PropTypes.oneOf(AccessibilityTraits),
       PropTypes.arrayOf(PropTypes.oneOf(AccessibilityTraits)),

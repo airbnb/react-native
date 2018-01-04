@@ -99,7 +99,10 @@ module.exports = {
    *
    * @platform android
    */
-  accessibilityComponentType: PropTypes.oneOf(AccessibilityComponentTypes),
+  accessibilityComponentType: PropTypes.oneOfType([
+    PropTypes.oneOf(AccessibilityComponentTypes),
+    PropTypes.arrayOf(PropTypes.oneOf(AccessibilityComponentTypes)),
+  ]),
 
   /**
    * Indicates to accessibility services whether the user should be notified

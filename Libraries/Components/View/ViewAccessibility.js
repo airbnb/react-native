@@ -34,7 +34,9 @@ export type AccessibilityComponentType =
   'none' |
   'button' |
   'radiobutton_checked' |
-  'radiobutton_unchecked';
+  'radiobutton_unchecked' |
+  'checked' |
+  'disabled';
 
 module.exports = {
   AccessibilityTraits: [
@@ -61,5 +63,7 @@ module.exports = {
     'button',
     'radiobutton_checked',
     'radiobutton_unchecked',
+    'checked',
+    'disabled',
   ],
 };
