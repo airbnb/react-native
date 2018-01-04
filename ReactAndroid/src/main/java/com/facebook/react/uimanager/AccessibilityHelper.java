@@ -14,6 +14,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.CheckBox;
+import android.widget.Switch;
 
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
@@ -26,6 +28,8 @@ import com.facebook.react.bridge.ReadableType;
 
   static final String BUTTON = "button";
   static final String RADIOBUTTON = "radiobutton";
+  static final String CHECKBOX = "checkbox";
+  static final String SWITCH = "switch";
   static final String CHECKED = "checked";
   static final String DISABLED = "disabled";
   static final String RADIOBUTTON_CHECKED = "radiobutton_checked";
@@ -85,6 +89,14 @@ class AccessibilityDelegate extends View.AccessibilityDelegate {
         break;
       case AccessibilityHelper.RADIOBUTTON:
         className = RadioButton.class.getName();
+        setCheckable();
+        break;
+      case AccessibilityHelper.CHECKBOX:
+        className = CheckBox.class.getName();
+        setCheckable();
+        break;
+      case AccessibilityHelper.SWITCH:
+        className = Switch.class.getName();
         setCheckable();
         break;
       case AccessibilityHelper.CHECKED:

@@ -96,7 +96,9 @@ In some cases, we also want to alert the end user of the type of selected compon
 To use, set the `accessibilityComponentType` property to one of (or an array of) accessibility strings:
 
 * **button** Used when the element should be treated as a button.
+* **checkbox** Used when the element should be treated as a check box.
 * **radiobutton** Used when the element should be treated as a radio button.
+* **switch** Used when the element should be treated as a switch.
 * **checked**  Used when the element (e.g. radio button) is checked.
 * **disabled** Used when the control is not enabled and does not respond to user input.
 * **radiobutton_checked** (deprecated) Same as ["radiobutton", "checked"].

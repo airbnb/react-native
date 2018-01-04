@@ -90,12 +90,17 @@ module.exports = {
    * Indicates to accessibility services to treat UI component like a
    * native one. Works for Android only.
    *
-   * Possible values are one of:
+   * Possible values are one or more of:
    *
    * - `'none'`
    * - `'button'`
-   * - `'radiobutton_checked'`
-   * - `'radiobutton_unchecked'`
+   * - `'checkbox'`
+   * - `'radiobutton'`
+   * - `'switch'`
+   * - `'checked'`
+   * - `'disabled'`
+   * - `'radiobutton_checked'` (deprecated)
+   * - `'radiobutton_unchecked'` (deprecated)
    *
    * @platform android
    */
