@@ -37,6 +37,7 @@
 		1497CFB01B21F5E400C1F8F2 /* RCTFontTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497CFA81B21F5E400C1F8F2 /* RCTFontTests.m */; };
 		1497CFB11B21F5E400C1F8F2 /* RCTEventDispatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497CFA91B21F5E400C1F8F2 /* RCTEventDispatcherTests.m */; };
 		1497CFB31B21F5E400C1F8F2 /* RCTUIManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497CFAB1B21F5E400C1F8F2 /* RCTUIManagerTests.m */; };
+		14AADF051AC3DBB1002390C9 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AADF041AC3DB95002390C9 /* libReact.a */; };
 		14B6DA821B276C5900BF4DD1 /* libRCTTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58005BEE1ABA80530062E044 /* libRCTTest.a */; };
 		14D6D7111B220EB3001FB087 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D6D7101B220EB3001FB087 /* libOCMock.a */; };
 		14D6D71E1B2222EF001FB087 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147CED4B1AB34F8C00DA3E4C /* libRCTActionSheet.a */; };
@@ -398,13 +399,6 @@
 			remoteGlobalIDString = 580C376F1AB104AF0015E709;
 			remoteInfo = RCTTest;
 		};
-		805BA2BD20E1A27F004F4F82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 805BA2B920E1A27F004F4F82 /* fishhook.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = fishhook;
-		};
 		834C36D11AF8DA610019C93C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 13CC9D481AEED2B90020D1C2 /* RCTSettings.xcodeproj */;
@@ -497,7 +491,6 @@
 		3DD981D51D33C6FB007DC7BE /* RNTesterUnitTestsBundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = RNTesterUnitTestsBundle.js; sourceTree = "<group>"; };
 		58005BE41ABA80530062E044 /* RCTTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTTest.xcodeproj; path = ../Libraries/RCTTest/RCTTest.xcodeproj; sourceTree = "<group>"; };
 		68FF44371CF6111500720EFD /* RCTBundleURLProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBundleURLProviderTests.m; sourceTree = "<group>"; };
-		805BA2B920E1A27F004F4F82 /* fishhook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = fishhook.xcodeproj; path = ../../Libraries/fishhook/fishhook.xcodeproj; sourceTree = "<group>"; };
 		83636F8E1B53F22C009F943E /* RCTUIManagerScenarioTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTUIManagerScenarioTests.m; sourceTree = "<group>"; };
 		8385CEF41B873B5C00C6273E /* RCTImageLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTImageLoaderTests.m; sourceTree = "<group>"; };
 		8385CF031B87479200C6273E /* RCTImageLoaderHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTImageLoaderHelpers.m; sourceTree = "<group>"; };
@@ -606,7 +599,6 @@
 			isa = PBXGroup;
 			children = (
 				2D66FF5F1ECA405900F0A767 /* ART.xcodeproj */,
-				805BA2B920E1A27F004F4F82 /* fishhook.xcodeproj */,
 				14AADEFF1AC3DB95002390C9 /* React.xcodeproj */,
 				14E0EEC81AB118F7000DECC3 /* RCTActionSheet.xcodeproj */,
 				134454551AAFCAAE003F0779 /* RCTAdSupport.xcodeproj */,
@@ -892,14 +884,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		805BA2BA20E1A27F004F4F82 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				805BA2BE20E1A27F004F4F82 /* libfishhook.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		834C36CE1AF8DA610019C93C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,10 +1104,6 @@
 				{
 					ProductGroup = 2D66FF601ECA405900F0A767 /* Products */;
 					ProjectRef = 2D66FF5F1ECA405900F0A767 /* ART.xcodeproj */;
-				},
-				{
-					ProductGroup = 805BA2BA20E1A27F004F4F82 /* Products */;
-					ProjectRef = 805BA2B920E1A27F004F4F82 /* fishhook.xcodeproj */;
 				},
 				{
 					ProductGroup = 147CED471AB34F8C00DA3E4C /* Products */;
@@ -1443,13 +1423,6 @@
 			fileType = archive.ar;
 			path = libRCTTest.a;
 			remoteRef = 58005BED1ABA80530062E044 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		805BA2BE20E1A27F004F4F82 /* libfishhook.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libfishhook.a;
-			remoteRef = 805BA2BD20E1A27F004F4F82 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		834C36D21AF8DA610019C93C /* libRCTSettings.a */ = {
